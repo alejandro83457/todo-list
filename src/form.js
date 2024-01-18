@@ -1,4 +1,6 @@
-export function createInboxForm() {
+import { generateTodo } from "./helperFunctions";
+
+export function createInboxForm(inbox, list) {
   let formDiv = document.createElement("div");
   formDiv.setAttribute("id", "inbox-form");
 
@@ -16,12 +18,21 @@ export function createInboxForm() {
 
   let button = document.createElement("button");
   button.setAttribute("type", "button");
-  button.setAttribute("id", "todo-button");
+  button.setAttribute("id", "add-todo-button");
   button.textContent = "Add";
+
+  // Add item when clicking add button.
+  button.addEventListener("click", () => {
+    generateTodo(inbox, list);
+
+    // Clear form input
+    document.querySelector("#title").value = "";
+    document.querySelector("#description").value = "";
+  });
 
   formDiv.appendChild(titleInput);
   formDiv.appendChild(descriptionInput);
   formDiv.appendChild(button);
 
-  return formDiv;
+  list.parentNode.appendChild(formDiv);
 }
