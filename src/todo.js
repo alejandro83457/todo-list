@@ -45,10 +45,10 @@ class SimpleTodo {
   get description() {
     return this.#description;
   }
-  stringify() {
+  getTodo() {
     let title = this.#title;
     let description = this.#description;
-    return JSON.stringify({ title, description });
+    return { title, description };
   }
   showTodo() {
     console.log(`${this.#title} ${this.#description}`);
