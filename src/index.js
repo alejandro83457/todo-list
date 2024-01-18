@@ -33,6 +33,7 @@ function loadStorage() {
   }
 }
 
+// Updates storage in browser to reflect added item.
 function updateStorage() {
   console.log(inbox.stringify());
   localStorage["inbox"] = inbox.stringify();
@@ -44,9 +45,17 @@ function inboxEventListener() {
   console.log("Inbox button clicked.");
   removeChildren();
   for (let todo of inbox.inbox) {
-    let ul = document.createElement("ul");
-    ul.textContent = `${todo.title} ${todo.description}`;
-    list.appendChild(ul);
+    let li = document.createElement("li");
+    li.textContent = `${todo.title} ${todo.description}`;
+    li.setAttribute("data", todo.title);
+
+    // Button for removing list item.
+    let removeButton = document.createElement("button");
+    removeButton.textContent = "Remove";
+    removeButton.addEventListener("click", (e) => removeParent(e));
+
+    li.appendChild(removeButton);
+    list.appendChild(li);
   }
 }
 
@@ -57,14 +66,33 @@ addToInboxButton.addEventListener("click", () =>
 function addToInboxButtonEventListener() {
   let title = document.querySelector("#title");
   let description = document.querySelector("#description");
-  let ul = document.createElement("ul");
-  ul.textContent = `${title.value} ${description.value}`;
-  list.appendChild(ul);
+  let li = document.createElement("li");
+  li.setAttribute("data", title.value);
+
+  // Button for removing list item.
+  let removeButton = document.createElement("button");
+  removeButton.textContent = "Remove";
+  removeButton.addEventListener("click", (e) => removeParent(e));
+
+  li.textContent = `${title.value} ${description.value}`;
+  li.appendChild(removeButton);
+  list.appendChild(li);
 
   let todo = new SimpleTodo(title.value, description.value);
   inbox.addTodo(todo);
 
-  updateStorage();
+  updateStorage(); // Updates local storage
+}
+
+// Remove list button event listener
+function removeParent(e) {
+  let parent = e.target.parentElement;
+  let parentAttribute = parent.getAttribute("data");
+  console.log(`Parent with data: ${parentAttribute} removed`);
+  parent.remove();
+  inbox.removeTodo(parentAttribute);
+
+  updateStorage(); // Updates local storage
 }
 
 // Clears list in DOM.
