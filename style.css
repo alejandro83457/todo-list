@@ -25,6 +25,11 @@ nav ul {
   margin: 0;
 }
 
+nav ul li:hover {
+  width: fit-content;
+  background-color: lightgray;
+}
+
 main {
   background-color: lightgoldenrodyellow;
 }
