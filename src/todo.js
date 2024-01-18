@@ -1,3 +1,4 @@
+// Used for projects
 class Todo {
   #title;
   #description;
@@ -30,6 +31,7 @@ class Todo {
   }
 }
 
+// Used for inbox only
 class SimpleTodo {
   #title;
   #description;
@@ -43,8 +45,13 @@ class SimpleTodo {
   get description() {
     return this.#description;
   }
+  stringify() {
+    let title = this.#title;
+    let description = this.#description;
+    return JSON.stringify({ title, description });
+  }
   showTodo() {
-    console.log(`${this.#title}\n${this.#description}}`);
+    console.log(`${this.#title} ${this.#description}`);
   }
 }
 

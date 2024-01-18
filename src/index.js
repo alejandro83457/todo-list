@@ -1,18 +1,38 @@
 import { Todo, SimpleTodo } from "./todo";
 import { Inbox } from "./inbox";
+import * as test from "./test";
 
-// if (localStorage.length > 0) console.log("Not empty!");
-// else console.log("Empty!");
+let content = document.querySelector("#content");
+let inbox;
 
-let todo1 = new SimpleTodo("title1", "description1");
-let todo2 = new SimpleTodo("title2", "description2");
-let todo3 = new SimpleTodo("title3", "description3");
-let todo4 = new SimpleTodo("title4", "description4");
+// Check if localStorage is set up properly.
+// If will only run once per device.
+function checkStorage() {
+  if (localStorage.length == 0) {
+    console.log("Empty. Loading content...");
+    let inbox = [];
+    let projects = {};
+    localStorage.setItem("inbox", JSON.stringify(inbox));
+    localStorage.setItem("projects", JSON.stringify(projects));
+  }
+}
 
-let inbox = new Inbox();
-inbox.addTodo(todo1);
-inbox.addTodo(todo2);
-inbox.addTodo(todo3);
-inbox.addTodo(todo4);
+// Loads inbox data from local storage.
+function loadStorage() {
+  let inboxFromLocal = localStorage.getItem("inbox");
+  inboxFromLocal = JSON.parse(inboxFromLocal);
+  inbox = new Inbox();
+  for (let todoFromLocal of inboxFromLocal) {
+    let title = todoFromLocal.title;
+    let description = todoFromLocal.description;
+    let todo = new SimpleTodo(title, description);
+    inbox.addTodo(todo);
+  }
+}
 
+// test.clearLocalStorage();
+checkStorage();
+loadStorage();
 inbox.showInbox();
+// test.populateInbox();
+test.printLocalStorage();
