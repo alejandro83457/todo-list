@@ -19,8 +19,8 @@ nav {
   /* padding-left: 1rem; */
 }
 
-nav ul,
-main ul {
+nav > ul,
+main > ul {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -29,6 +29,10 @@ main ul {
 nav ul li:hover {
   width: fit-content;
   background-color: lightgray;
+}
+
+main > ul > li {
+  display: flex;
 }
 
 main {
