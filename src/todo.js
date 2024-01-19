@@ -2,12 +2,12 @@
 class Todo {
   #title;
   #description;
-  #dueDate;
+  #due;
   #priority;
-  constructor(title, description, dueDate, priority) {
+  constructor(title, description, due, priority) {
     this.#title = title;
     this.#description = description;
-    this.#dueDate = dueDate;
+    this.#due = due;
     this.#priority = priority;
   }
   get title() {
@@ -16,17 +16,15 @@ class Todo {
   get description() {
     return this.#description;
   }
-  get dueDate() {
-    return this.#dueDate;
+  get due() {
+    return this.#due;
   }
   get priority() {
     return this.#priority;
   }
   showTodo() {
     console.log(
-      `${this.#title}\n${this.#description}\n${this.#dueDate}\n${
-        this.#priority
-      }`
+      `\t${this.#title} ${this.#description} ${this.#due} ${this.#priority}`
     );
   }
 }

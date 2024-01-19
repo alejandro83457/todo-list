@@ -1,19 +1,32 @@
-import { checkStorage, loadStorage } from "./storage";
+import {
+  checkStorage,
+  loadInboxFromStorage,
+  loadProjectsFromStorage,
+} from "./storage";
 import { createInboxForm } from "./form";
-import { removeChildren, populateInbox, generateTodo } from "./helperFunctions";
+import { removeChildren, populateInbox } from "./helperFunctions";
+// import { clearLocalStorage } from "./test";
 
-let list = document.querySelector("#list");
 let inbox;
-
-let inboxButton = document.querySelector("#inbox");
+let projects;
 
 // Inbox button event listener stuff.
-inboxButton.addEventListener("click", () => {
+document.querySelector("#inbox").addEventListener("click", () => {
+  let list = document.querySelector("#list");
   removeChildren(list); // Clear content
   populateInbox(inbox, list); // Populate
   createInboxForm(inbox, list); // Create & add form
 });
 
+// document.querySelector("#projects").addEventListener("click", () => {
+//   let list = document.querySelector("#projects-list");
+
+// });
+
+// clearLocalStorage();
 checkStorage();
-inbox = loadStorage();
+inbox = loadInboxFromStorage();
 inbox.showInbox();
+
+projects = loadProjectsFromStorage();
+projects.showProjects();

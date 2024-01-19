@@ -1,4 +1,4 @@
-import { updateStorage } from "./storage";
+import { updateInboxStorage } from "./storage";
 import { SimpleTodo } from "./todo";
 
 // ----------------------
@@ -57,7 +57,7 @@ export function generateTodo(inbox, list) {
   let todo = new SimpleTodo(title.value, description.value);
   inbox.addTodo(todo);
 
-  updateStorage(inbox); // Updates local storage
+  updateInboxStorage(inbox); // Updates local storage
 }
 
 // ----------------------
@@ -68,7 +68,7 @@ export function createCheckbox(inbox) {
   checkbox.addEventListener("change", (e) => {
     inbox.removeTodo(e.target.parentElement.getAttribute("data"));
     removeParent(e);
-    updateStorage(inbox);
+    updateInboxStorage(inbox);
   });
   return checkbox;
 }

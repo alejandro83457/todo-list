@@ -37,3 +37,31 @@ export function printLocalStorage() {
     console.log(todo);
   }
 }
+
+// let sampleProjects = [
+//   {
+//     title: "title1",
+//     todos: [
+//       { title: "todo1", description: "desc1", due: "today", severity: "low" },
+//       {
+//         title: "todo2",
+//         description: "desc2",
+//         due: "tomorrow",
+//         severity: "medium",
+//       },
+//     ],
+//   },
+//   {
+//     title: "title2",
+//     todos: [
+//       {
+//         title: "todo5",
+//         description: "desc5",
+//         due: "yesterday",
+//         severity: "high",
+//       },
+//     ],
+//   },
+//   { title: "title3", todos: [] },
+// ];
+// localStorage.setItem("projects", JSON.stringify(sampleProjects));
