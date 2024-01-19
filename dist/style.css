@@ -27,9 +27,19 @@ nav {
   margin: 0;
 }
 
-nav ul li:hover {
-  width: fit-content;
+#main-nav > li:hover,
+#add-project:hover,
+#add-project-button:hover {
   background-color: lightgray;
+}
+
+#project-name-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+#project-name {
+  width: 80px;
 }
 
 #projects-list,

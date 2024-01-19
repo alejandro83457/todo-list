@@ -1,4 +1,6 @@
 import { generateTodo } from "./helperFunctions";
+import { Project, Projects } from "./project";
+import { removeChildrenFromNav, populateProjects } from "./helperFunctions";
 
 export function createInboxForm(inbox, list) {
   let formDiv = document.createElement("div");
@@ -35,4 +37,28 @@ export function createInboxForm(inbox, list) {
   formDiv.appendChild(button);
 
   list.parentNode.appendChild(formDiv);
+}
+
+export function createProjectNameForm(projects, list) {
+  let container = document.createElement("div");
+  let input = document.createElement("input");
+  let add = document.createElement("div");
+
+  container.setAttribute("id", "project-name-container");
+
+  input.setAttribute("type", "text");
+  input.setAttribute("id", "project-name");
+  input.setAttribute("placeholder", "Project name");
+
+  add.setAttribute("id", "add-project-button");
+  add.textContent = "Add";
+  add.addEventListener("click", () => {
+    projects.addProject(new Project(input.value));
+    removeChildrenFromNav(list);
+    populateProjects(projects, list);
+  });
+
+  container.appendChild(input);
+  container.appendChild(add);
+  list.appendChild(container);
 }

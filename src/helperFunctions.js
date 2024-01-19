@@ -9,12 +9,20 @@ export function removeParent(e) {
 }
 
 // ----------------------
-// Clears list in DOM.
-export function removeChildren(list) {
+// Clears list in main.
+export function removeChildrenFromMain(list) {
   while (list.childNodes.length > 0) {
     list.removeChild(list.firstChild);
   }
   list.parentNode.removeChild(list.parentNode.lastChild);
+}
+
+// ----------------------
+// Clears list in nav.
+export function removeChildrenFromNav(list) {
+  while (list.childNodes.length > 0) {
+    list.removeChild(list.firstChild);
+  }
 }
 
 // ----------------------
@@ -32,6 +40,20 @@ export function populateInbox(inbox, list) {
     // Add elements to li.
     li.appendChild(checkbox);
     li.appendChild(todoText);
+    list.appendChild(li);
+  }
+}
+
+// ----------------------
+// Populates projects
+export function populateProjects(projects, list) {
+  for (let project of projects.projects) {
+    let li = document.createElement("li");
+
+    let projectText = document.createElement("div");
+    projectText.textContent = `${project.projectTitle}`;
+
+    li.appendChild(projectText);
     list.appendChild(li);
   }
 }
