@@ -26,8 +26,14 @@ document.querySelector("#inbox").addEventListener("click", () => {
 // Projects button event listener stuff.
 document.querySelector("#projects").addEventListener("click", () => {
   let list = document.querySelector("#projects-list");
-  removeChildrenFromNav(list);
-  populateProjects(projects, list);
+
+  // Allows for toggling functionality
+  if (list.childNodes.length > 0) {
+    removeChildrenFromNav(list);
+  } else {
+    removeChildrenFromNav(list);
+    populateProjects(projects, list);
+  }
 });
 
 // Add project button event listener stuff.
