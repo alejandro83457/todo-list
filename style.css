@@ -19,8 +19,9 @@ nav {
   /* padding-left: 1rem; */
 }
 
-nav > ul,
-main > ul {
+#main-nav,
+#list,
+#projects-list {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -29,6 +30,11 @@ main > ul {
 nav ul li:hover {
   width: fit-content;
   background-color: lightgray;
+}
+
+#projects-list,
+#add-project {
+  padding-left: 1rem;
 }
 
 main > ul > li {
