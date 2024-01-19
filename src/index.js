@@ -5,7 +5,7 @@ import {
 } from "./storage";
 import { createInboxForm, createProjectNameForm } from "./form";
 import {
-  removeChildrenFromMain,
+  removeChildren,
   removeChildrenFromNav,
   populateInbox,
   populateProjects,
@@ -18,7 +18,7 @@ let projects;
 // Inbox button event listener stuff.
 document.querySelector("#inbox").addEventListener("click", () => {
   let list = document.querySelector("#list");
-  removeChildrenFromMain(list); // Clear content
+  removeChildren(); // Clear content
   populateInbox(inbox, list); // Populate
   createInboxForm(inbox, list); // Create & add form
 });

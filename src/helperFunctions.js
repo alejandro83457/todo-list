@@ -8,15 +8,17 @@ export function removeParent(e) {
   parent.remove();
 }
 
-// ----------------------
-// Clears list in main.
-export function removeChildrenFromMain(list) {
+// Remvoes children from main
+// Removes form IF present
+export function removeChildren() {
+  let list = document.querySelector("#list");
   while (list.childNodes.length > 0) {
     list.removeChild(list.firstChild);
   }
-  list.parentNode.removeChild(list.parentNode.lastChild);
+  if (document.querySelector("#inbox-form")) {
+    document.querySelector("#inbox-form").remove();
+  }
 }
-
 // ----------------------
 // Clears list in nav.
 export function removeChildrenFromNav(list) {
@@ -46,9 +48,36 @@ export function populateInbox(inbox, list) {
 
 // ----------------------
 // Populates projects
+export function populateMain(project) {
+  let list = document.querySelector("#list");
+  let todos = project.project["todos"];
+  for (let todo of todos) {
+    let li = document.createElement("li");
+    li.setAttribute("data", todo.title);
+
+    let todoText = document.createElement("div");
+    todoText.textContent = `${todo.title} ${todo.description} ${todo.due} ${todo.priority}`;
+
+    // TODO: Create checkbox
+
+    // Add elemdents to li.
+    li.appendChild(todoText);
+    list.appendChild(li);
+  }
+}
+
+// ----------------------
+// Populates projects title on nav
 export function populateProjects(projects, list) {
   for (let project of projects.projects) {
     let li = document.createElement("li");
+    li.addEventListener("click", () => {
+      if (document.querySelector("#inbox-form")) {
+        document.querySelector("#inbox-form").remove();
+      }
+      removeChildren();
+      populateMain(project);
+    });
 
     let projectText = document.createElement("div");
     projectText.textContent = `${project.projectTitle}`;

@@ -1,7 +1,9 @@
-import { generateTodo } from "./helperFunctions";
+import { generateTodo, removeChildrenFromMain } from "./helperFunctions";
 import { Project, Projects } from "./project";
 import { removeChildrenFromNav, populateProjects } from "./helperFunctions";
 
+// --------------------------
+// Creates inbox form
 export function createInboxForm(inbox, list) {
   let formDiv = document.createElement("div");
   formDiv.setAttribute("id", "inbox-form");
@@ -39,6 +41,8 @@ export function createInboxForm(inbox, list) {
   list.parentNode.appendChild(formDiv);
 }
 
+// --------------------------
+// Creates project name form
 export function createProjectNameForm(projects, list) {
   let container = document.createElement("div");
   let input = document.createElement("input");
@@ -52,8 +56,12 @@ export function createProjectNameForm(projects, list) {
 
   add.setAttribute("id", "add-project-button");
   add.textContent = "Add";
+
+  // Event listener for adding project after typing name
   add.addEventListener("click", () => {
     projects.addProject(new Project(input.value));
+
+    // We want to reflect the added project on the list.
     removeChildrenFromNav(list);
     populateProjects(projects, list);
   });
