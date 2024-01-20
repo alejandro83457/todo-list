@@ -5,7 +5,6 @@ import { Projects, Project } from "./project";
 // Check if localStorage is set up properly.
 // If will only run once per device.
 export function checkStorage() {
-  console.log(typeof localStorage.getItem("projects"));
   if (localStorage.length == 0) {
     console.log("Empty. Loading content...");
     let inbox = [];

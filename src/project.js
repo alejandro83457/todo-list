@@ -56,6 +56,13 @@ export class Project {
   addTodo(todo) {
     this.#project["todos"].push(todo);
   }
+  removeTodo(title) {
+    let index;
+    for (let i = 0; i < this.#project["todos"].length; i++) {
+      if (this.#project["todos"][i].title == title) index = i;
+    }
+    this.#project["todos"].splice(index, 1);
+  }
   showProject() {
     console.log(this.#project["title"]);
     for (let todo of this.#project["todos"]) {

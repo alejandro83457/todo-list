@@ -41,7 +41,7 @@ export function populateInbox(inbox, list) {
     let todoText = document.createElement("div");
     todoText.textContent = `${todo.title} ${todo.description}`;
 
-    let checkbox = createCheckbox(inbox);
+    let checkbox = createCheckboxForInbox(inbox);
 
     // Add elements to li.
     li.appendChild(checkbox);
@@ -52,7 +52,7 @@ export function populateInbox(inbox, list) {
 
 // ----------------------
 // Populates projects
-export function populateMain(project) {
+export function populateMain(projects, project) {
   let list = document.querySelector("#list");
   let todos = project.project["todos"];
   for (let todo of todos) {
@@ -63,8 +63,10 @@ export function populateMain(project) {
     todoText.textContent = `${todo.title} ${todo.description} ${todo.due} ${todo.priority}`;
 
     // TODO: Create checkbox
+    let checkbox = createCheckboxForProject(projects, project);
 
     // Add elemdents to li.
+    li.appendChild(checkbox);
     li.appendChild(todoText);
     list.appendChild(li);
   }
@@ -80,7 +82,7 @@ export function populateProjects(projects, list) {
         document.querySelector("#inbox-form").remove();
       }
       removeChildren();
-      populateMain(project);
+      populateMain(projects, project);
       createProjectForm(project, projects);
     });
 
@@ -104,7 +106,7 @@ export function generateTodo(inbox, list) {
   todoText.textContent = `${title.value} ${description.value}`;
 
   // Checkbox for removing list item.
-  let checkbox = createCheckbox(inbox);
+  let checkbox = createCheckboxForInbox(inbox);
 
   li.appendChild(checkbox);
   li.appendChild(todoText);
@@ -128,10 +130,12 @@ export function generateTodoProject(project, projects, list) {
   li.setAttribute("data", title.value);
 
   // TODO: Add checkbox for removal
+  let checkbox = createCheckboxForProject(projects, project);
 
   let todoText = document.createElement("div");
   todoText.textContent = `${title.value} ${description.value} ${due.value} ${priority.value}`;
 
+  li.appendChild(checkbox);
   li.appendChild(todoText);
   list.appendChild(li);
 
@@ -148,13 +152,24 @@ export function generateTodoProject(project, projects, list) {
 
 // ----------------------
 // Creates checkbox.
-export function createCheckbox(inbox) {
+function createCheckboxForInbox(inbox) {
   let checkbox = document.createElement("input");
   checkbox.setAttribute("type", "checkbox");
   checkbox.addEventListener("change", (e) => {
     inbox.removeTodo(e.target.parentElement.getAttribute("data"));
     removeParent(e);
     updateInboxStorage(inbox);
+  });
+  return checkbox;
+}
+
+function createCheckboxForProject(projects, project) {
+  let checkbox = document.createElement("input");
+  checkbox.setAttribute("type", "checkbox");
+  checkbox.addEventListener("change", (e) => {
+    project.removeTodo(e.target.parentElement.getAttribute("data"));
+    removeParent(e);
+    updateProjectsStorage(projects);
   });
   return checkbox;
 }
