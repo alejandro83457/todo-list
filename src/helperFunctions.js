@@ -77,6 +77,7 @@ export function populateMain(projects, project) {
 export function populateProjects(projects, list) {
   for (let project of projects.projects) {
     let li = document.createElement("li");
+    li.setAttribute("data", project.projectTitle);
     li.addEventListener("click", () => {
       if (document.querySelector("#inbox-form")) {
         document.querySelector("#inbox-form").remove();
@@ -89,6 +90,9 @@ export function populateProjects(projects, list) {
     let projectText = document.createElement("div");
     projectText.textContent = `${project.projectTitle}`;
 
+    let checkbox = createCheckboxForTitles(projects);
+
+    li.appendChild(checkbox);
     li.appendChild(projectText);
     list.appendChild(li);
   }
@@ -162,7 +166,6 @@ function createCheckboxForInbox(inbox) {
   });
   return checkbox;
 }
-
 function createCheckboxForProject(projects, project) {
   let checkbox = document.createElement("input");
   checkbox.setAttribute("type", "checkbox");
@@ -170,6 +173,18 @@ function createCheckboxForProject(projects, project) {
     project.removeTodo(e.target.parentElement.getAttribute("data"));
     removeParent(e);
     updateProjectsStorage(projects);
+  });
+  return checkbox;
+}
+function createCheckboxForTitles(projects) {
+  let checkbox = document.createElement("input");
+  checkbox.setAttribute("type", "checkbox");
+  checkbox.addEventListener("change", (e) => {
+    projects.removeProject(e.target.parentElement.getAttribute("data"));
+
+    removeParent(e);
+    updateProjectsStorage(projects);
+    removeChildren();
   });
   return checkbox;
 }
