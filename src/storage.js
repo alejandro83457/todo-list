@@ -33,6 +33,7 @@ export function loadProjectsFromStorage() {
   let projectsFromLocal = localStorage.getItem("projects");
   projectsFromLocal = JSON.parse(projectsFromLocal);
   let projects = new Projects();
+  if (projectsFromLocal.length == 0) return projects;
   for (let projectFromLocal of projectsFromLocal) {
     let title = projectFromLocal["title"];
     let todos = projectFromLocal["todos"];

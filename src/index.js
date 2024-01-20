@@ -10,7 +10,7 @@ import {
   populateInbox,
   populateProjects,
 } from "./helperFunctions";
-// import { clearLocalStorage } from "./test";
+import { clearLocalStorage } from "./test";
 
 let inbox;
 let projects;
@@ -74,7 +74,7 @@ document.querySelector("#add-project").addEventListener("click", () => {
 // ];
 // localStorage.setItem("projects", JSON.stringify(sampleProjects));
 
-// clearLocalStorage();
+clearLocalStorage();
 checkStorage();
 inbox = loadInboxFromStorage();
 // inbox.showInbox();
