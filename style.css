@@ -47,6 +47,10 @@ nav {
   padding-left: 1rem;
 }
 
+#projects-list > li {
+  display: flex;
+}
+
 main > ul > li {
   display: flex;
 }
