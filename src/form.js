@@ -1,6 +1,7 @@
 import { generateTodo, generateTodoProject } from "./helperFunctions";
 import { Project } from "./project";
 import { removeChildrenFromNav, populateProjects } from "./helperFunctions";
+import { updateProjectsStorage } from "./storage";
 
 // --------------------------
 // Creates inbox form
@@ -121,6 +122,8 @@ export function createProjectNameForm(projects, list) {
     // We want to reflect the added project on the list.
     removeChildrenFromNav(list);
     populateProjects(projects, list);
+
+    updateProjectsStorage(projects);
   });
 
   container.appendChild(input);
