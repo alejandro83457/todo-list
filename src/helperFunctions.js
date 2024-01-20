@@ -1,5 +1,6 @@
-import { updateInboxStorage } from "./storage";
-import { SimpleTodo } from "./todo";
+import { updateInboxStorage, updateProjectsStorage } from "./storage";
+import { SimpleTodo, Todo } from "./todo";
+import { createProjectForm } from "./form";
 
 // ----------------------
 // Remove list button event listener
@@ -17,11 +18,14 @@ export function removeChildren() {
   }
   if (document.querySelector("#inbox-form")) {
     document.querySelector("#inbox-form").remove();
+  } else if (document.querySelector("#project-form")) {
+    document.querySelector("#project-form").remove();
   }
 }
 // ----------------------
 // Clears list in nav.
-export function removeChildrenFromNav(list) {
+export function removeChildrenFromNav() {
+  let list = document.querySelector("#projects-list");
   while (list.childNodes.length > 0) {
     list.removeChild(list.firstChild);
   }
@@ -77,6 +81,7 @@ export function populateProjects(projects, list) {
       }
       removeChildren();
       populateMain(project);
+      createProjectForm(project, projects);
     });
 
     let projectText = document.createElement("div");
@@ -88,7 +93,7 @@ export function populateProjects(projects, list) {
 }
 
 // ----------------------
-// Create and add a todo.
+// Create and add a todo for inbox.
 export function generateTodo(inbox, list) {
   let title = document.querySelector("#title");
   let description = document.querySelector("#description");
@@ -109,6 +114,36 @@ export function generateTodo(inbox, list) {
   inbox.addTodo(todo);
 
   updateInboxStorage(inbox); // Updates local storage
+}
+
+// ----------------------
+// Create and add a todo for project.
+export function generateTodoProject(project, projects, list) {
+  let title = document.querySelector("#title");
+  let description = document.querySelector("#description");
+  let due = document.querySelector("#due");
+  let priority = document.querySelector("#priority");
+
+  let li = document.createElement("li");
+  li.setAttribute("data", title.value);
+
+  // TODO: Add checkbox for removal
+
+  let todoText = document.createElement("div");
+  todoText.textContent = `${title.value} ${description.value} ${due.value} ${priority.value}`;
+
+  li.appendChild(todoText);
+  list.appendChild(li);
+
+  let todo = new Todo(
+    title.value,
+    description.value,
+    due.value,
+    priority.value
+  );
+
+  project.addTodo(todo);
+  updateProjectsStorage(projects);
 }
 
 // ----------------------

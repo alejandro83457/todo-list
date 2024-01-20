@@ -41,7 +41,7 @@ export function loadProjectsFromStorage() {
       let todoTitle = todo["title"];
       let todoDescription = todo["description"];
       let todoDue = todo["due"];
-      let todoPriority = todo["severity"];
+      let todoPriority = todo["priority"];
       let projectTodo = new Todo(
         todoTitle,
         todoDescription,
@@ -58,4 +58,8 @@ export function loadProjectsFromStorage() {
 // Updates storage in browser to reflect added item.
 export function updateInboxStorage(inbox) {
   localStorage["inbox"] = inbox.stringify();
+}
+
+export function updateProjectsStorage(projects) {
+  localStorage["projects"] = projects.stringify();
 }

@@ -22,6 +22,13 @@ class Todo {
   get priority() {
     return this.#priority;
   }
+  getTodo() {
+    let title = this.#title;
+    let description = this.#description;
+    let due = this.#due;
+    let priority = this.#priority;
+    return { title, description, due, priority };
+  }
   showTodo() {
     console.log(
       `\t${this.#title} ${this.#description} ${this.#due} ${this.#priority}`
