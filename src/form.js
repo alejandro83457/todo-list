@@ -104,7 +104,8 @@ export function createProjectForm(project, projects) {
 export function createProjectNameForm(projects, list) {
   let container = document.createElement("div");
   let input = document.createElement("input");
-  let add = document.createElement("div");
+  // let add = document.createElement("div");
+  let add = document.createElement("button");
 
   container.setAttribute("id", "project-name-container");
 

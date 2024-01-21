@@ -1,5 +1,6 @@
 body {
   font-family: "Roboto", sans-serif;
+  font-size: 20px;
   margin: 0;
   display: grid;
   grid-template-rows: 2fr 20fr 1fr;
@@ -8,15 +9,20 @@ body {
 }
 
 header {
-  background-color: lightblue;
+  background-color: #bfdbfe;
   grid-column: 1 / 3;
   display: flex;
-  /* padding-left: 1rem; */
+  padding-left: 1rem;
 }
 
 nav {
-  background-color: lightcyan;
-  /* padding-left: 1rem; */
+  background-color: #dbeafe;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 #main-nav,
@@ -27,19 +33,39 @@ nav {
   margin: 0;
 }
 
+#main-nav > li,
+#add-project,
+#projects-list > li {
+  padding: 0.5rem;
+  padding-left: 1rem;
+}
+
 #main-nav > li:hover,
 #add-project:hover,
-#add-project-button:hover {
-  background-color: lightgray;
+#projects-list > li:hover {
+  background-color: #93c5fd;
+  border-radius: 5px;
 }
 
 #project-name-container {
+  padding: 0.5rem;
+  padding-left: 1rem;
   display: flex;
   gap: 0.5rem;
 }
 
 #project-name {
   width: 80px;
+  height: fit-content;
+}
+#add-project-button {
+  height: fit-content;
+}
+
+#project-form,
+#inbox-form {
+  display: flex;
+  gap: 0.5rem;
 }
 
 #projects-list,
@@ -51,16 +77,23 @@ nav {
   display: flex;
 }
 
+#list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 main > ul > li {
   display: flex;
 }
 
 main {
-  background-color: lightgoldenrodyellow;
+  background-color: #eff6ff;
+  padding: 1rem;
 }
 
 footer {
-  background-color: lightgrey;
+  background-color: #bfdbfe;
   grid-column: 1 / 3;
   display: flex;
   justify-content: center;
